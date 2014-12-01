@@ -1,0 +1,154 @@
+{
+  "name": "ericco92-BWA-MEM-Parallel-0.7.10",
+  "available": true,
+  "version": "0.1.0",
+  "helpURI": "https://github.com/edawson/BWA-parallel",
+  "label": "BWA-parallel",
+  "defaultNodeCount": 1,
+  "defaultRequestedTime": "05:00:00",
+  "shortDescription": "Maps FASTA/FASTQ reads to a reference sequence.",
+  "longDescription": "A parallel wrapper for BWA, a short-read FASTA/FASTQ aligner.",
+  "executionSystem": "stampede-06212014-1555-ericd92",
+  "ontology":["http://sswapmeet.sswap.info/agave/apps/Application"],
+  "executionType": "HPC",
+  "parallelism": "PARALLEL",
+  "defaultNodeCount": 1,
+  "defaultProcessorsPerNode": 16,
+  "checkpointable": false,
+  "deploymentPath": "/ericco92/applications/BWA-MEM-Parallel-0.7.10/stampede/",
+  "templatePath": "bwa-mem-parallel.sh",
+  "testPath": "test.sh",
+  "tags": [
+    "next-gen", "bwa", "fasta", "aligner"
+  ],
+  "modules": [],
+  "inputs": [
+    {
+      "id": "infile",
+      "details": {
+      	"label": "FASTA/FASTQ Input File",
+        "description": "Input file to split.",
+        "argument": null,
+        "showArgument": false
+      },
+      "semantics": {
+        "minCardinality": 1,
+        "ontology": []
+      },
+      "value": {
+          "default" :"",
+        "required": true,
+        "visible": true
+      }
+    },
+    {
+      "id": "mates",
+      "details": {
+      	"label": "FASTA/FASTQ Input File Read Mates",
+        "description":"A file containing the mates of the original reads.",
+        "argument": null,
+        "showArgument": false
+      },
+      "semantics": {
+        "minCardinality": 1,
+        "ontology": []
+      },
+      "value": {
+        "default": "",
+        "required": false,
+        "visible": true
+      }
+    },
+    {
+      "id": "reference",
+      "details": {
+        "label": "Reference Genome",
+        "description": "The reference genome to align to in fasta format.",
+        "argument": null,
+        "showArgument": false
+      },
+      "value": {
+        "required": true,
+        "visible": true,
+        "default": ""
+      },
+      "semantics": {
+        "ontology": []
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "id": "unpackInputs",
+      "details": {
+        "label": "Unpack input files",
+        "description": "If true, any compressed input files will be expanded prior to execution on the remote system.",
+        "argument": "1",
+        "showArgument": true
+      },
+      "value": {
+        "default": "true",
+        "type": "flag",
+        "visible": true,
+        "required": false
+      },
+      "semantics": {
+        "ontology": []
+      }
+    },
+    {
+      "id": "slices",
+      "details": {
+        "label": "Number of slices",
+        "description": "The number of intermediate files to split the infile into.",
+        "argument": "-split ",
+        "showArgument": true
+      },
+      "value": {
+      	"visible": true,
+        "required": true,
+        "type": "number",
+        "default": 5
+      },
+      "semantics": {
+        "ontology": []
+      }
+    },
+    {
+      "id": "algorithm",
+      "details": {
+        "label": "BWA Algorithm",
+        "description": "The BWA method to use.",
+        "argument": null,
+        "showArgument": false
+      },
+      "value": {
+        "type": "string",
+      	"visible": true,
+        "required": true,
+        "default": "mem"
+      },
+      "semantics": {
+        "ontology": []
+      }
+    },
+    {
+      "id": "records",
+      "details": {
+        "label": "Max records per slice",
+        "description": "The maximum number of records to put in an intermediate file.",
+        "argument": "-records ",
+        "showArgument": true
+      },
+      "value": {
+        "default": 1000,
+        "type": "number",
+        "required": false,
+        "visible": true
+      },
+      "semantics": {
+        "ontology": []
+      }
+    }
+  ]
+}

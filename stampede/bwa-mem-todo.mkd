@@ -1,0 +1,14 @@
+TODO: BWA-mem integration
+----------------
+Eric Dawson
+
+1. Paired ends
+    -Handle split correctly
+    -Test their data
+2. Sanity check against Bos taurus genome (UMD from James' files)
+    -> Check for mapped to unmapped ratio
+    -> Examine in IGV
+3. Optional Arguments
+4. Test on cow data
+5. Finish JSON and submit to Agave
+6. Handle zipped files automatically (test if zipped and unzip)
